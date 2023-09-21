@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+{% block content %}
+
+
+
+<h2>My trip list</h2>
+
+<form method="GET">
+    <input type="text" name ="search-area" value={{search_input}}>
+    <input type="submit" value ="Search"/>
+</form>
+
+<div class="d-flex">
+    <div class="list-group">
+        {% for trip in trips %}
+        <a href="{% url 'trip:tripdetail' trip.id %}" class="list-group-item list-group-item-action" >
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ trip.title }}</h5>
+        </div>
+        <p class="mb-1">From {{ trip.origin }} To {{ trip.destination }}</p>
+        <small>{{ trip.note }}</small>
+        </a>
+        {% endfor %}
+    </div>
+                
+    <div class="col-md-6 offset-md-1">
+        {{map_html|safe}}
+    </div>
+</div>
+
+
+{% endblock content %}

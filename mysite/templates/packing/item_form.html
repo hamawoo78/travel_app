@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<h3>
+    {% if is_edit %}
+        Edit Item
+    {% else %}
+        Add Item
+    {% endif %}
+</h3>
+{% for item in items %}
+    {% if forloop.first %}
+    <a href = "{% url 'itemlist' items.trip %}">Go back</a>
+    {% endif %}
+{% endfor %}
+
+<form method="POST" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="submit">
+</form>
+
+{% endblock content %}

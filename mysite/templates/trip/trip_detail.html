@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+{% block content %}
+
+
+<h1>{{ trip.title }}</h1>
+<ul>
+    <li>Destination : {{ trip.destination }}</li>
+    <li>Deperture : {{ trip.origin }}</li>
+    <li>Start : {{ trip.start_date|date:"F j, Y"  }}</li>
+    <li>End : {{ trip.end_date|date:"F j, Y"  }}</li>
+    <li>Note : {{ trip.note }}</li>
+</ul>
+
+<div>
+    <button type="button" class="btn btn-primary btn-sm">
+        <a href="{% url 'itemlist' trip.id %}" style="color: white;">Packing List</a>
+    </button>
+    <button type="button" class="btn btn-primary btn-sm">
+        <a href="{% url 'plan:planlist' trip.id %}" style="color: white;">Plan List</a>
+    </button>
+    <button type="button" class="btn btn-secondary btn-sm">
+        <a href="{% url 'trip:edittrip' trip.id %}"style="color: white;" >Edit</a>
+    </button>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4 off-md-1">
+        {{map_html|safe}}
+    </div>
+</div>
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% extends 'packing/main.html' %}
+{% block content %}
+
+<a href="{% url 'member:triplist' %}">Go back</a>
+
+<form method="POST">
+    {% csrf_token %}
+    <p>Are you sure you want to delete this task? "{{trip.title}}"</p>
+    <input type = "submit" value="Delete"/></input>
+</form>
+
+{% endblock content %}

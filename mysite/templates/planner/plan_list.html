@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+{% block content %}
+
+
+
+<h2>My Plan</h2>
+
+<form method="GET">
+    <input type="text" name ="search-area" value={{search_input}}>
+    <input type="submit" value ="Search"/>
+</form>
+
+<div class="card">
+    <img src="..." class="card-img-top" alt="...">
+  
+    <div class="card-body">
+        {% if hotels %}
+            <h5 class="card-title">{{ hotels.name }}</h5>
+            <p class="card-text">{{hotels.address}}</p>
+            <a href="{% url 'plan:addhotel' trip_id %}" class="btn btn-primary">Hotel Detail</a>
+        {% else %}
+            <p class="card-text">No hotel information is available</p>
+            <a href="{% url 'plan:addhotel' trip_id %}" class="btn btn-primary">Add Hotel Detail</a>
+        {% endif %}
+    </div>
+  </div>
+
+<div class="d-flex">
+    <div class="list-group">
+        {% for plan in plans %}
+        <a href="{% url 'trip:tripdetail' trip.id %}" class="list-group-item list-group-item-action" >
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ plan.place }}</h5>
+        </div>
+        <p class="mb-1">Note: {{ plan.address }}</p>
+        <small>{{ plan.note }}</small>
+        </a>
+        {% endfor %}
+        <button type="button" class="btn btn-primary btn-sm">
+            <a href="{% url 'plan:addplan' trip_id %}" style="color: white;">Add New Plan</a>
+        </button>
+    </div>
+                
+    <div class="col-md-6 offset-md-1">
+        {{map_html|safe}}
+    </div>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="header-bar">
+    <div>
+        <h3>you have {{count}} incomplete item{{ count|pluralize:"s" }}</h3>
+    </div>
+</div>
+
+<h1>My packing list</h1>
+<form method="GET">
+    <input type="text" name ="search-area" value={{search_input}}>
+    <input type="submit" value ="Search"/>
+</form>
+
+<ul class="list-group">
+    {% for item in items %}
+    <li class="list-group-item">
+        {% if item.is_completed %}
+        <input class="form-check-input me-1" type="checkbox" value="" id="{{ item.id }}">
+        <label class="form-check-label" >
+            <s><a href="{% url 'itemdetail' item.id %}">{{ item.title }}</a></s>
+            <a href="{% url 'deleteitem' item.id %}">&#215;</a>
+        </label>
+        {% else %}
+        <input class="form-check-input me-1" type="checkbox" value="" id="{{ item.id }}">
+        <label class="form-check-label" >
+            <a href="{% url 'itemdetail' item.id %}">{{ item.title }}</a>
+            <a href="{% url 'deleteitem' item.id %}">&#215;</a>
+        </label>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+
+
+<button type="button" class="btn btn-outline-info" ><a href="{% url 'additem' trip_id %}" style="color: lightblue;">Add Item</a></button>
+
+
+
+
+{% endblock content %}
+
+<!-- https://www.youtube.com/watch?v=llbtoQTt4qw -->

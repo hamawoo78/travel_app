@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<h1>{{ items.title }}</h1>
+<ul>
+    <li>Status : {{ items.is_completed }}</li>
+    <li>Date : {{ items.date }}</li>
+    <li>Note : {{ items.note }}</li>
+</ul>
+
+<a href="{% url 'edititem' items.id %}">Edit</a></td>
+
+{% endblock content %}
